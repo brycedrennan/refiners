@@ -17,7 +17,7 @@ class Scheduler(ABC):
     """
     A base class for creating a diffusion model scheduler.
 
-    The Scheduler creates a sequence of noise and scaling factors used in the diffusion process,
+    The Scheduler creates a sequence of predicted_noise and scaling factors used in the diffusion process,
     which gradually transforms the original data distribution into a Gaussian one.
 
     This process is described using several parameters such as initial and final diffusion rates,
@@ -52,9 +52,9 @@ class Scheduler(ABC):
         self.timesteps = self._generate_timesteps()
 
     @abstractmethod
-    def __call__(self, x: Tensor, noise: Tensor, step: int, generator: Generator | None = None) -> Tensor:
+    def __call__(self, x: Tensor, predicted_noise: Tensor, step: int, generator: Generator | None = None) -> Tensor:
         """
-        Applies a step of the diffusion process to the input tensor `x` using the provided `noise` and `timestep`.
+        Applies a step of the diffusion process to the input tensor `x` using the provided `predicted_noise` and `timestep`.
 
         This method should be overridden by subclasses to implement the specific diffusion process.
         """
@@ -104,7 +104,7 @@ class Scheduler(ABC):
             case "karras":
                 return 1 - self.sample_power_distribution(7)
             case _:
-                raise ValueError(f"Unknown noise schedule: {self.noise_schedule}")
+                raise ValueError(f"Unknown predicted_noise schedule: {self.noise_schedule}")
 
     def add_noise(
         self,

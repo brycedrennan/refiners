@@ -1127,7 +1127,7 @@ def test_diffusion_refonly(
         torch.randn(2, 4, 64, 64, device=test_device)  # for SD Web UI reproductibility only
     predicted_image = sd15.lda.decode_latents(x)
 
-    # min_psnr lowered to 33 because this reference image was generated without noise removal (see #192)
+    # min_psnr lowered to 33 because this reference image was generated without predicted_noise removal (see #192)
     ensure_similar_images(predicted_image, expected_image_refonly, min_psnr=33, min_ssim=0.99)
 
 

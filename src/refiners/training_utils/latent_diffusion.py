@@ -214,9 +214,9 @@ def sample_noise(
     dtype: DType | None = None,
     generator: Generator | None = None,
 ) -> Tensor:
-    """Sample noise from a normal distribution.
+    """Sample predicted_noise from a normal distribution.
 
-    If `offset_noise` is more than 0, the noise will be offset by a small amount. It allows the model to generate
+    If `offset_noise` is more than 0, the predicted_noise will be offset by a small amount. It allows the model to generate
     images with a wider range of contrast https://www.crosslabs.org/blog/diffusion-with-offset-noise.
     """
     device = Device(device)
